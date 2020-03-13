@@ -8,7 +8,8 @@
                  [org.clojure/tools.logging "0.5.0"
                   :exclusions [org.clojure/clojure]]
                  [org.clojure/java.classpath "1.0.0"]
-                 [pdfboxing "0.1.14"]]
+                 [pdfboxing "0.1.14"]
+                 [cprop "0.1.14" :exclusions [org.clojure/clojure]]]
 
   :repositories [["central" "https://maven.aliyun.com/repository/central"]
                  ["jcenter" "https://maven.aliyun.com/repository/jcenter"]
@@ -20,4 +21,12 @@
 
   :main ^:skip-aot med-record-parser.core
   :target-path "target/%s"
-  :profiles {:uberjar {:aot :all}})
+  :source-paths ["src"]
+  :test-paths ["test"]
+  :resource-paths ["resources"]
+  :profiles {:uberjar {:aot :all
+                       :uberjar-name   "med-record-parser.jar"
+                       :source-paths   ["src"]
+                       :resource-paths ["resources"]}
+             :dev   {:resource-paths ["resources"]
+                     :jvm-opts ["-Dconf=config.edn"]}})

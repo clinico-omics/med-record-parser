@@ -10,13 +10,7 @@
 (defn basename [path]
   (and path (.getName (io/file path))))
 
-(defn save2txt
-  [text path]
-  (with-open [w (clojure.java.io/writer  path)]
-    (.write w text)))
-
-(defn find-func
-  [ftype]
-  (case ftype
-    "txt" save2txt
-    println))
+(defn expand-home [s]
+  (if (.startsWith s "~")
+    (clojure.string/replace-first s "~" (System/getProperty "user.home"))
+    s))

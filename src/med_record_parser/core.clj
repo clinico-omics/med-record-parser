@@ -4,6 +4,8 @@
             [med-record-parser.pdf :as pdf]
             [med-record-parser.parser :as parser]
             [med-record-parser.util :as util]
+            [med-record-parser.config :as config]
+            [clojure.tools.logging :as log]
             [cli-matic.core :refer [run-cmd]])
   (:gen-class))
 
@@ -30,7 +32,7 @@
                                 {:option "output" :short "o" :as "Output file/directory" :type :string :default :present}
                                 {:option "type" :short "t" :as "Command type supported by pdf command." :type #{"text"} :default "text"}]
                   :runs        pdf/command}
-                 
+
                  {:command     "parser"
                   :description "Parse TEXT from medical record."
                   :opts        [{:option "input" :short "i" :as "Input file/directory" :type :string :default :present}
@@ -40,4 +42,7 @@
                   :runs        parser/command}]})
 
 (defn -main [& args]
+  (log/info "Starting med-record-parser in STANDALONE mode")
+  ; Load configuration from system-props & env
+  (config/load-env)
   (run-cmd args CONFIGURATION))

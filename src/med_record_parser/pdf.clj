@@ -1,12 +1,12 @@
 (ns med-record-parser.pdf
   (:require [pdfboxing.text :as text]
             [clojure.string :as str]
-            [med-record-parser.util :as util]))
+            [med-record-parser.io :as io]))
 
 (defn pdf2text
   "Extract text from a pdf file."
   [input output]
-  (util/save2txt (text/extract input) output))
+  (io/save2txt (text/extract input) output))
 
 (def command-map
   {:text pdf2text})
