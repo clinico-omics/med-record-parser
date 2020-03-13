@@ -4,7 +4,7 @@
    [cprop.source :as source]))
 
 (def env
-  (atom {:mrp-plugin-repo-path "/etc/mrp/plugins"}))
+  (atom {:mrp-plugin-path "/etc/mrp/plugins"}))
 
 (defn load-env
   []

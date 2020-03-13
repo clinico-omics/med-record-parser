@@ -12,7 +12,7 @@
    which are stored in a hash-map.
   "
   [{:keys [input output rtype ftype]}]
-  (plugin/local-repo (:mrp-plugin-repo-path @env))         ; Reset plugin-repo-path for load-plugin function
+  (plugin/local-repo (:mrp-plugin-path @env))         ; Reset plugin-repo-path for load-plugin function
   (plugin/load-plugin rtype)
   (log/info "Load plugin" rtype)
   (-> ((find-var (symbol (str rtype "/" "parse"))) input)  ; The namespace of plugin is `plugin-name`
